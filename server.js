@@ -2,10 +2,17 @@ const express = require('express')
 const app = express()
 const usersRouter = require('./routes/users')
 
+// template engine
 app.set('view engine', 'ejs')
+// middleware
 app.use(Logger)
+// render static files
 app.use(express.static('public'))
 app.use('/static', express.static('public'))
+// parse form
+app.use(express.urlencoded({ extended: true }))
+// parse JSON
+app.use(express.json())
 
 // get post put delete patch
 app.get('/', Logger, (req, res, next) => {
